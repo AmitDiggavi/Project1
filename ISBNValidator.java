@@ -10,7 +10,11 @@ public class ISBNValidator implements IISBNValidator {
             .split("");
         Integer[] digits = new Integer[intsAsStrings.length];
         for (int i = 0; i < intsAsStrings.length; i++) {
-            digits[i] = Integer.parseInt(intsAsStrings[i]);
+            try {
+                digits[i] = Integer.parseInt(intsAsStrings[i]);
+            } catch (NumberFormatException ignored) {
+                return false;
+            }
         }
         if (digits.length != 13) return false;
 

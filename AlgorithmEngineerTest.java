@@ -32,20 +32,7 @@ public class AlgorithmEngineerTest {
             if (!map.remove("a").equals("b")) return false;
             if (map.remove("f") != null) return false;
             if (map.containsKey("a")) return false;
-        } catch (Exception ignored) {
-            return false;
-        }
 
-        return true;
-    }
-
-    /**
-     * tests non-existent key for get, and duplicate key for put
-     * @return true if success, false if fail
-     */
-    public static boolean test2() {
-        try {
-            IterableMap<String, String> map = new IterableMap<>(2);
             // duplicate key
             map.put("alex", "goat");
             if (map.put("alex", "not the goat")) return false;
@@ -55,15 +42,31 @@ public class AlgorithmEngineerTest {
         } catch (NoSuchElementException e) {
             if (!e.getMessage().equals("Map does not contain key"))
                 return false;
+        } catch (Exception ignored) {
+            return false;
         }
 
         return true;
     }
 
     /**
+     * tests ISBN validator
+     */
+    public static boolean test2() {
+        ISBNValidator iv = new ISBNValidator();
+        // good ones
+        if (!iv.validate("9780330491198")) return false;
+        if (!iv.validate("978-0-306-40615-7")) return false;
+
+        // bad boys
+        if (iv.validate("978-0-306-40615-5")) return false;
+        if (iv.validate("978-0-306-4061-7")) return false;
+        if (iv.validate("978-0-306-40615-76")) return false;
+        return !iv.validate("good isbn trust me");
+    }
+
+    /**
      * tests utility methods - size, clear, and containsKey
-     *
-     * @return true if success, false if fail
      */
     public static boolean test3() {
         try {
@@ -92,7 +95,6 @@ public class AlgorithmEngineerTest {
 
     /**
      * tests iterator
-     * @return true if success, false if fail
      */
     public static boolean test4() {
         try {
@@ -114,7 +116,6 @@ public class AlgorithmEngineerTest {
 
     /**
      * tests capacity increase when load factor >= 0.7
-     * @return success ? true : false
      */
     public static boolean test5() {
         try {
