@@ -13,17 +13,6 @@ public class IterableMap<KeyType, ValueType> implements IterableMapADT<KeyType, 
 
     protected LinkedList<Node<KeyType, ValueType>>[] chains;
 
-    public static void main(String[] args) {
-        IterableMap<Integer, Integer> im = new IterableMap();
-        im.put(1, 1);
-        im.put(2, 2);
-        im.put(3, 3);
-        im.put(4, 4);
-        for (Integer i : im) {
-            System.out.println(i);
-        }
-    }
-
     /**
      * Creates a hash table with specified capacity
      * @param capacity the capacity of the hashtable
@@ -209,7 +198,6 @@ public class IterableMap<KeyType, ValueType> implements IterableMapADT<KeyType, 
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override public Iterator<ValueType> iterator() {
         ArrayList<ValueType> values = new ArrayList<>();
         for (LinkedList<Node<KeyType, ValueType>> linkedNodeList : chains) {
@@ -222,7 +210,7 @@ public class IterableMap<KeyType, ValueType> implements IterableMapADT<KeyType, 
 
             @Override
             public boolean hasNext() {
-                return currentIndex < values.size() && values.get(currentIndex) != null;
+                return currentIndex < values.size();
             }
 
             @Override
