@@ -7,10 +7,50 @@ public class DataWranglerTest
   {
       test1();
       test2();
-      getBookcount();
-      printBookbyIsbn("9780439554893");
-      printBookbyAuthor("Rowling");
+      test3();
+      test4("9780345453747");
+      test5("Rowling");
       
+  }
+  
+  //this method is to check if the path is null 
+  public static boolean test1()
+  {
+    
+	  System.out.println("Test1: ");
+	
+	  BookLoader obj = new BookLoader();
+	  
+	  List<IBook> books1;
+	  
+	  String path = null;
+	  
+	  
+	 try 
+	 {
+		books1 = obj.loadBooks(path);
+	} 
+	 
+	 catch (Exception e) 
+	 {
+		// TODO Auto-generated catch block
+		 System.out.println("true");
+		 System.out.println();
+		 System.out.println();
+		 System.out.println();
+		 System.out.println();
+		 return true;
+	}
+	 
+	 
+	 System.out.println();
+	 System.out.println();
+	 System.out.println();
+	 System.out.println();
+	 
+	 
+	 return false;
+
   }
   
   //prints all the books present in the csv file
@@ -29,7 +69,9 @@ public class DataWranglerTest
 		books = obj.loadBooks("books.csv");
 		for(IBook b:books)
 		{
-			System.out.println(b.getTitle() + "       " + b.getAuthors() + "        " + b.getISBN13());
+			System.out.println("true");
+			
+			return true;
 			
 			
 		}
@@ -41,7 +83,7 @@ public class DataWranglerTest
 	 catch (FileNotFoundException e) 
 	 {
 		// TODO Auto-generated catch block
-		 System.out.println("Path Does Not Exist");
+		 System.out.println("false");
 		 
 		 System.out.println();
 		 System.out.println();
@@ -65,51 +107,10 @@ public class DataWranglerTest
   }
   
   
-  //this method is to check output when a wrong path is given
-  public static boolean test1()
-  {
-    
-	  System.out.println("Test1: ");
-	
-	  BookLoader obj = new BookLoader();
-	  
-	  List<IBook> books1;
-	  
-	  
-	 try 
-	 {
-		books1 = obj.loadBooks("/Users/suryanarne/eclipse-workspace");
-		
-	} 
-	 
-	 catch (FileNotFoundException e) 
-	 {
-		// TODO Auto-generated catch block
-		 System.out.println("Path Does Not Exist");
-		 
-		 System.out.println();
-		 System.out.println();
-		 System.out.println();
-		 System.out.println();
-		 System.out.println();
-		 return false;
-		 
-		  
-	}
-	 
-	 System.out.println();
-	 System.out.println();
-	 System.out.println();
-	 System.out.println();
-	 System.out.println();
-	 
-	 
-	 return true;
-
-  }
+ 
   
 //this method returns the count of books present in the csv file
-public static int getBookcount()
+public static boolean test3()
 {
 	BookLoader obj = new BookLoader();
 	
@@ -123,13 +124,16 @@ public static int getBookcount()
 		
 		int bookCount = books.size();
 		
-		System.out.println("Book Count: " + bookCount);
+		if(bookCount != 0)
+		{
+			 System.out.println("true");
+		}
 	}
 	
 	catch (FileNotFoundException e) 
 	 {
 		// TODO Auto-generated catch block
-		 System.out.println("Path Does Not Exist");
+		 System.out.println("False");
 		 
 		 System.out.println();
 		 System.out.println();
@@ -137,6 +141,7 @@ public static int getBookcount()
 		 System.out.println();
 		 System.out.println();
 		 
+		 return false;
 		  
 	}
 	
@@ -145,11 +150,11 @@ public static int getBookcount()
 	 System.out.println();
 	 System.out.println();
 	 System.out.println();
-	return 0;
+	return true;
 }
 
 //method returns details of a book through isbn
-public static void printBookbyIsbn(String isbn)
+public static boolean test4(String isbn)
 {
 
 	BookLoader obj = new BookLoader();
@@ -160,9 +165,9 @@ public static void printBookbyIsbn(String isbn)
 	
 	if(isbn == "")
 	{
-		System.out.println("Enter valid isbn");
+		System.out.println("False");
 		
-		return;
+		return false;
 	}
 	
 	try
@@ -175,36 +180,42 @@ public static void printBookbyIsbn(String isbn)
 		{
 			if(b.getISBN13().equals(isbn))
 			{
-				System.out.println(b.getTitle() + "       " + b.getAuthors() + "        " + b.getISBN13());
+				System.out.println("true");
+				return true;
 			}
 				
 		}
+		
+		
 }
 	
 	catch (FileNotFoundException e) 
 	 {
 		// TODO Auto-generated catch block
-		 System.out.println("Path Does Not Exist");
+		 System.out.println("False");
 		 
 		 System.out.println();
 		 System.out.println();
 		 System.out.println();
 		 System.out.println();
 		 System.out.println();
+		 
+		 return false;
 		 
 		  
 	}
 	
-	 System.out.println();
+	 System.out.println("false");
 	 System.out.println();
 	 System.out.println();
 	 System.out.println();
 	 System.out.println();
   
+	 return false;
 }
 
 //method returns details of a book through authors
-public static void printBookbyAuthor(String author)
+public static boolean test5(String author)
 {
     BookLoader obj = new BookLoader();
 	
@@ -214,9 +225,9 @@ public static void printBookbyAuthor(String author)
 	
 	if(author == "")
 	{
-		System.out.println("Enter valid author");
+		System.out.println("false");
 		
-		return;
+		return false;
 	}
 	
 	try
@@ -227,7 +238,9 @@ public static void printBookbyAuthor(String author)
 		{
 			if(b.getAuthors().contains(author))
 			{
-				System.out.println(b.getTitle() + "       " + b.getAuthors() + "        " + b.getISBN13());
+				System.out.println("true");
+				
+				return true;
 			}
 				
 		}
@@ -236,20 +249,27 @@ public static void printBookbyAuthor(String author)
 	catch (FileNotFoundException e) 
 	 {
 		// TODO Auto-generated catch block
-		 System.out.println("Path Does Not Exist");
+		 System.out.println("False");
 		 
 		 System.out.println();
 		 System.out.println();
 		 System.out.println();
 		 System.out.println();
 		 System.out.println();
+		 
+		 return false;
 		 
 		  
 	}
 	
+	System.out.println("False");
+	return false;
+	
 	
 }
 
 
 }
+
+
 
