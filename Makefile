@@ -5,5 +5,5 @@ BackendDeveloperTest.class:	BackendDeveloperTest.java BookMapperBackend.class
 BookMapperBackend.class: BookMapperBackend.java
 	javac BookMapperBackend.java
 clean:
-	rm*.class
+	rm *.class
 

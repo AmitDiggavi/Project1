@@ -74,7 +74,7 @@ public class BookMapperBackend implements IBookMapperBackend {
             while (hashmap.iterator().hasNext()) {
                 Book book2 = (Book) hashmap.iterator().next();
 
-                if (book2.getTitle().contains(word)) {
+                if (book2.getTitle().contains(word) || book2.getTitle().contains(getAuthorFilter())) {
 
                     list_of_books.add(book2);
                     return list_of_books;
