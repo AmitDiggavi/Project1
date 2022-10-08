@@ -1,5 +1,5 @@
 
-test: runProgram
+runDataWranglertest: runProgram
 
 runProgram: Book.class BookLoader.class DataWranglerTest.class
 	java DataWranglerTest
