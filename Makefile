@@ -1,4 +1,4 @@
-runTests: BackendDeveloperTest.class
+BackendDeveloperTests: BackendDeveloperTest.class
 	java BackendDeveloperTest
 BackendDeveloperTest.class:	BackendDeveloperTest.java BookMapperBackend.class
 	javac BackendDeveloperTest.java
