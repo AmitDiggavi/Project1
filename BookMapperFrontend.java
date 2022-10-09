@@ -6,8 +6,7 @@ public class BookMapperFrontend implements IBookMapperFrontend {
     private IBookMapperBackend backend;
     private IISBNValidator validator;
     private Scanner scn;
-
-
+    
     public BookMapperFrontend(Scanner userInputScanner, IBookMapperBackend backend,
         IISBNValidator validator) {
         this.backend = backend;
@@ -53,7 +52,8 @@ public class BookMapperFrontend implements IBookMapperFrontend {
     public void isbnLookup() {
         System.out.println("You are in the Set Author Filter Menu:");
         System.out.println("          Enter ISBN to look up: ");
-        String currentISBN = scn.nextLine();
+        scn.nextLine();
+        String currentISBN = scn.nextLine().trim();
         if (validator.validate(currentISBN)) {
             ArrayList<IBook> bookList = new ArrayList<>();
             bookList.add(backend.getByISBN(currentISBN));
@@ -71,7 +71,9 @@ public class BookMapperFrontend implements IBookMapperFrontend {
         System.out.println("You are in the Search for Title Word Menu:");
         System.out.println("          Enter a word to search for in book titles "
             + "(empty for all books):");
+        scn.nextLine();
         displayBooks(backend.searchByTitleWord(scn.nextLine()));
+        displayMainMenu();
     }
 
     /**
@@ -83,6 +85,7 @@ public class BookMapperFrontend implements IBookMapperFrontend {
             backend.getAuthorFilter());
         System.out.println("          Enter a new string for author names to contain "
             + "(empty for any):");
+        scn.nextLine();
         backend.setAuthorFilter(scn.nextLine());
         displayMainMenu();
     }
@@ -92,13 +95,17 @@ public class BookMapperFrontend implements IBookMapperFrontend {
      * @param books
      */
     public void displayBooks(List<IBook> books) {
+        if (books.isEmpty() || books.get(0) == null) {
+            System.out.println("No Matches");
+            return;
+        }
         int numBooks = books.size();
         if (numBooks != 1) {
             System.out.println(
                 "Matches (author filter: " + backend.getAuthorFilter() + ") " + books.size() +
                     " of " + backend.getNumberOfBooks());
         }
-        for (int i = 0; i <= numBooks; i++) {
+        for (int i = 0; i < numBooks; i++) {
             System.out.println((i + 1) + ". " + "\"" + books.get(i).getTitle() +
                 "\"" + " by " + books.get(i).getAuthors() + ", ISBN: " + books.get(i).getISBN13());
         }

@@ -32,9 +32,13 @@ public class FrontendDeveloperTest {
      * @return true if the correct book corresponding to the ISBN is printed, false otherwise
      */
     public static boolean test2() {
-        TextUITester tester = new TextUITester("1\n9780330491198\n4\n");
+        TextUITester tester = new TextUITester("1\n9781812297048\n4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
+        Book hitchhiker = new Book("Hitchhiker", "Douglas Adams", "9781812297048");
+        backend.addBook(hitchhiker);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
@@ -53,12 +57,16 @@ public class FrontendDeveloperTest {
     public static boolean test3() {
         TextUITester tester = new TextUITester("3\nJames Joyce\n4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
+        Book steam = new Book("steam", "James Joyce", "1231231231234");
+        backend.addBook(steam);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
         if(!output.startsWith("Welcome to the Book Mapper Application!") ||
-            !output.contains("Joyce") || output.contains("Adams")) {
+            !backend.getAuthorFilter().equals("James Joyce") ) {
             return false;
         }
         return true;
@@ -71,7 +79,11 @@ public class FrontendDeveloperTest {
     public static boolean test4() {
         TextUITester tester = new TextUITester("2\nsteam\n4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
+        Book steam = new Book("steam", "Moy", "1231231231234");
+        backend.addBook(steam);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
@@ -87,9 +99,13 @@ public class FrontendDeveloperTest {
      * @return true if successful, false otherwise
      */
     public static boolean test5() {
-        TextUITester tester = new TextUITester("3\nDouglas Adams\n2\nhitchhiker\n");
+        TextUITester tester = new TextUITester("3\nDouglas Adams\n2\nHitchhiker\n4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
+        Book hitchhiker = new Book("Hitchhiker", "Douglas Adams", "1231231231235");
+        backend.addBook(hitchhiker);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
