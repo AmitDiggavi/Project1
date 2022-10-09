@@ -69,7 +69,7 @@ public class BookMapperBackend implements IBookMapperBackend {
         Book book = new Book("Frankenstein", "Mary Shelley", "54321");
 
         hashmap.book1.add(book);
-        if```(word != null) {
+        if (word != null) {
 
             while (hashmap.iterator().hasNext()) {
                 Book book2 = (Book) hashmap.iterator().next();
