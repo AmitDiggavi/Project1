@@ -1,8 +1,9 @@
+run: BookMapper.java Book.class BookLoader.class BookMapperBackend.class BookMapperFrontend.java ISBNValidator.java IterableMap.java
+	java BookMapper
 
+runTests: runDataWranglerTests runAlgorithmEngineerTests runFrontendDeveloperTests runBackendDeveloperTests
 
-runDataWranglertest: runProgram
-
-runProgram: Book.class BookLoader.class DataWranglerTest.class
+runDataWranglerTests: Book.class BookLoader.class DataWranglerTest.class
 	java DataWranglerTest
 
 Book.class: Book.java
@@ -15,7 +16,7 @@ DataWranglerTest.class: DataWranglerTest.java
 	javac DataWranglerTest.java
 
 
-BackendDeveloperTests: BackendDeveloperTest.class
+runBackendDeveloperTests: BackendDeveloperTest.class
 	java BackendDeveloperTest
 BackendDeveloperTest.class:	BackendDeveloperTest.java BookMapperBackend.class
 	javac BackendDeveloperTest.java
