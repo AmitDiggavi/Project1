@@ -5,7 +5,7 @@ import java.util.List;
 public class BookMapperBackend implements IBookMapperBackend {
 
 
-    protected IterableMapADTPlaceHolder<String, IBook> hashmap = new IterableMapADTPlaceHolder<>();
+    protected IterableMap<String, IBook> hashmap = new IterableMap<>();
     protected String authorFilter;
     /**
      * Adds a new book to the backend's database and is stored in
@@ -63,60 +63,37 @@ public class BookMapperBackend implements IBookMapperBackend {
      * @param word word that must be contained in a book's title in result set
      * @return list of books found
      */
-    public List<IBook> searchByTitleWord(String word)
-    {
+    public List<IBook> searchByTitleWord(String word) {
         List<IBook> list_of_books = new ArrayList<>();
-        Book book = new Book("Frankenstein", "Mary Shelley", "54321");
-
-        hashmap.book1.add(book);
-        if (word != null) {
-
-            while (hashmap.iterator().hasNext()) {
-                Book book2 = (Book) hashmap.iterator().next();
-
-                if (book2.getTitle().contains(word) || book2.getTitle().contains(getAuthorFilter())) {
-
-                    list_of_books.add(book2);
-                    return list_of_books;
-                }else
-                {
-                    break;
-                }
-
-            }
-        }
-        System.out.println("No book with this word exists");
-        return list_of_books;
-    }
-
-
-    /**
-     * Return the book uniquely identified by the ISBN, or null if ISBN is not
-     * present in the dataset.
-     * @param ISBN the book's ISBN number
-     * @return the book identified by the ISBN, or null if ISBN not in database
-     */
-    public IBook getByISBN(String ISBN)
-    {
-        Book book3 = new Book("Frankenstein", "Mary Shelley", "54321");
-        hashmap.book1.add(book3);
-
-
-        while(hashmap.iterator().hasNext())
+        for(IBook book : hashmap)
         {
-            Book book = (Book) hashmap.iterator().next();
-            if(book.getISBN13().equals(ISBN))
+            if(book.getTitle().equals(word))
             {
-                return book;
-            }
-            else
-            {
-                break;
+                list_of_books.add(book);
+                return list_of_books;
             }
         }
+
         return null;
     }
 
+        /**
+         * Return the book uniquely identified by the ISBN, or null if ISBN is not
+         * present in the dataset.
+         * @param ISBN the book's ISBN number
+         * @return the book identified by the ISBN, or null if ISBN not in database
+         */
+        public IBook getByISBN (String ISBN)
+        {
 
+            for (IBook book : hashmap) {
+                if (book.getISBN13().equals(ISBN)) {
+                    return book;
+                }
+            }
 
-}
+            return null;
+        }
+
+    }
+        
