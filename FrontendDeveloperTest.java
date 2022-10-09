@@ -16,7 +16,9 @@ public class FrontendDeveloperTest {
     public static boolean test1() {
         TextUITester tester = new TextUITester("4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
@@ -34,7 +36,9 @@ public class FrontendDeveloperTest {
     public static boolean test2() {
         TextUITester tester = new TextUITester("1\n9780330491198\n4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
@@ -53,7 +57,9 @@ public class FrontendDeveloperTest {
     public static boolean test3() {
         TextUITester tester = new TextUITester("3\nJames Joyce\n4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
@@ -71,7 +77,9 @@ public class FrontendDeveloperTest {
     public static boolean test4() {
         TextUITester tester = new TextUITester("2\nsteam\n4\n");
         Scanner scn = new Scanner(System.in);
-        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, null, null);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
         testFrontend.runCommandLoop();
         String output = tester.checkOutput();
         System.out.println(output);
