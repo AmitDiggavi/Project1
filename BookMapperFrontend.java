@@ -14,6 +14,7 @@ public class BookMapperFrontend implements IBookMapperFrontend {
         this.scn = userInputScanner;
     }
 
+
     /**
      * This method starts the command loop for the frontend, and will
      * terminate when the user exists the app.
@@ -95,7 +96,7 @@ public class BookMapperFrontend implements IBookMapperFrontend {
      * @param books
      */
     public void displayBooks(List<IBook> books) {
-        if (books.isEmpty() || books.get(0) == null) {
+        if (books == null || books.isEmpty() || books.get(0) == null) {
             System.out.println("No Matches");
             return;
         }
