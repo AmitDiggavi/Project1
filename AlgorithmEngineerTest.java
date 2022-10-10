@@ -2,15 +2,17 @@ import java.util.NoSuchElementException;
 
 public class AlgorithmEngineerTest {
     public static void main(String[] args) {
-        System.out.println("test1(): " + test1());
-        System.out.println("test2(): " + test2());
-        System.out.println("test3(): " + test3());
-        System.out.println("test4(): " + test4());
-        System.out.println("test5(): " + test5());
+        System.out.println("AlgorithmEngineer Individual Test 1: " + (test1() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Individual Test 2: " + (test2() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Individual Test 3: " + (test3() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Individual Test 4: " + (test4() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Individual Test 5: " + (test5() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Integration Test 1: " + (test6() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Integration Test 2: " + (test7() ? "passed" : "failed"));
     }
 
     /**
-     * tests basic map functionality & remove with existent and non-existent keys
+     * tests basic map functionality
      */
     public static boolean test1() {
         try {
@@ -32,13 +34,6 @@ public class AlgorithmEngineerTest {
             if (!map.remove("a").equals("b")) return false;
             if (map.remove("f") != null) return false;
             if (map.containsKey("a")) return false;
-
-            // duplicate key
-            map.put("alex", "goat");
-            if (map.put("alex", "not the goat")) return false;
-
-            map.get("non-existent");
-            return false;
         } catch (NoSuchElementException e) {
             if (!e.getMessage().equals("Map does not contain key"))
                 return false;
@@ -66,26 +61,14 @@ public class AlgorithmEngineerTest {
     }
 
     /**
-     * tests utility methods - size, clear, and containsKey
+     * tests containsKey
      */
     public static boolean test3() {
         try {
             IterableMap<String, String> map = new IterableMap<>();
-            // size 0
-            if (map.size() != 0) return false;
-
-            // size 2
             map.put("a", "b");
-            map.put("c", "d");
-            if (map.size() != 2) return false;
 
-            // contains "a"
             if (!map.containsKey("a")) return false;
-
-            // cleared
-            map.clear();
-            if (map.size() != 0) return false;
-
         } catch (Exception ignored) {
             return false;
         }
@@ -125,6 +108,54 @@ public class AlgorithmEngineerTest {
             map.put("e", "f");
             if (map.size() != 3) return false;
 
+        } catch (Exception ignored) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * tests utility methods - size, clear
+     */
+    public static boolean test6() {
+        try {
+            IterableMap<String, String> map = new IterableMap<>();
+            // size 0
+            if (map.size() != 0) return false;
+
+            // size 2
+            map.put("a", "b");
+            map.put("c", "d");
+            if (map.size() != 2) return false;
+
+            // cleared
+            map.clear();
+            if (map.size() != 0) return false;
+
+        } catch (Exception ignored) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * tests remove with existent and non-existent keys
+     */
+    public static boolean test7() {
+        try {
+            IterableMap<String, String> map = new IterableMap<>();
+
+            // duplicate key
+            map.put("alex", "goat");
+            if (map.put("alex", "not the goat")) return false;
+
+            map.get("non-existent");
+            return false;
+        } catch (NoSuchElementException e) {
+            if (!e.getMessage().equals("Map does not contain key"))
+                return false;
         } catch (Exception ignored) {
             return false;
         }
