@@ -6,7 +6,7 @@ public class BookMapperBackend implements IBookMapperBackend {
 
 
     protected IterableMap<String, IBook> hashmap = new IterableMap<>();
-    protected String authorFilter;
+    protected String authorFilter = "";
     /**
      * Adds a new book to the backend's database and is stored in
      * a hash table internally.

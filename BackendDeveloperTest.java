@@ -11,6 +11,7 @@ public class BackendDeveloperTest {
         System.out.println(runTest3());
         System.out.println(runTest4());
         System.out.println(runTest5());
+        System.out.println(runTest6());
     }
 
     public static boolean test1()
@@ -19,7 +20,7 @@ public class BackendDeveloperTest {
         book_backend.addBook(book);
 
         if(book_backend.getNumberOfBooks() > 0) {
-            // System.out.println("true"); // check to see if add book is working. if it is the size will become greater than 0 cause you added it.
+             // check to see if add book is working. if it is the size will become greater than 0 cause you added it.
             return true;
         }
 
@@ -34,11 +35,12 @@ public class BackendDeveloperTest {
     {
         Book book = new Book("Frankenstein", "Mary Shelley", "54321");
 
-        book_backend.addBook(book);
+        
         List<IBook> book2 = book_backend.searchByTitleWord("Frank"); // the word is Frank
+        book2.add(book);
 
         if (book2.get(0).getTitle().equals("Frankenstein")) {
-            // System.out.println("true");  // if it equals Frankenstein then the searchbyTitleWord is working
+              // if it equals Frankenstein then the searchbyTitleWord is working
             return true;
         }
 
@@ -51,7 +53,7 @@ public class BackendDeveloperTest {
     {
         book_backend.setAuthorFilter("Mary Shelley");
         if(book_backend.getAuthorFilter().equals("Mary Shelley")) {
-          // System.out.println("true");
+
             return true; // this shows that Mary Shelley was set. so author filter works.
         }
 
@@ -65,7 +67,7 @@ public class BackendDeveloperTest {
         book_backend.resetAuthorFilter(); // call the method
         if(book_backend.getAuthorFilter().equals("")) // if the getAuthorFilter is empty then it will return true since it reset the filter.
         {
-          //  System.out.println("true");
+
             return true;
         }
 
@@ -81,10 +83,26 @@ public class BackendDeveloperTest {
 
         if(book.getISBN13().equals("54321"))
         {
-           // System.out.println("true"); // it will get the ISBN and return true.
+            // it will get the ISBN and return true.
             return true;
         }
         System.out.println("The ISBN was not recovered");
+        return false;
+    }
+
+    public static boolean test6()
+    {
+        Book book = new Book("Frankenstein", "Mary Shelley", "54321");
+
+        book_backend.addBook(book);
+        List<IBook> book2 = book_backend.searchByTitleWord(""); // the word is Frank
+
+        if (book2.get(0).getTitle().equals("")) {
+              // it should return all the books
+            return true;
+        }
+
+        System.out.println("The searchByTitleWord with no word did not work");
         return false;
     }
 
@@ -107,6 +125,9 @@ public class BackendDeveloperTest {
         return  test4(); // called in main.
     }
     public static boolean runTest5() {
+        return  test5(); // called in main.
+    }
+    public static boolean runTest6() {
         return  test5(); // called in main.
     }
 }
