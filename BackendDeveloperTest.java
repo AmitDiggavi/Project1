@@ -6,12 +6,14 @@ public class BackendDeveloperTest {
 
      public static void main(String[] args)
     {
-        System.out.println(runTest1());
-        System.out.println(runTest2());
-        System.out.println(runTest3());
-        System.out.println(runTest4());
-        System.out.println(runTest5());
-        System.out.println(runTest6());
+        System.out.println("BackendDeveloper Individual Test 1: " + (test1() ? "passed" : "failed"));
+        System.out.println("BackendDeveloper Individual Test 2: " + (test2() ? "passed" : "failed"));
+        System.out.println("BackendDeveloper Individual Test 3: " + (test3() ? "passed" : "failed"));
+        System.out.println("BackendDeveloper Individual Test 4: " + (test4() ? "passed" : "failed"));
+        System.out.println("BackendDeveloper Individual Test 5: " + (test5() ? "passed" : "failed"));
+        System.out.println("BackendDeveloper Integration  Test 6: " + (test6() ? "passed" : "failed"));
+        System.out.println("BackendDeveloper Integration  Test 7: " + (test7() ? "passed" : "failed"));
+
     }
 
     public static boolean test1()
@@ -35,9 +37,9 @@ public class BackendDeveloperTest {
     {
         Book book = new Book("Frankenstein", "Mary Shelley", "54321");
 
-        
-        List<IBook> book2 = book_backend.searchByTitleWord("Frank"); // the word is Frank
-        book2.add(book);
+        book_backend.addBook(book);
+        List<IBook> book2 = book_backend.searchByTitleWord("Frankenstein"); // the word is Frank
+
 
         if (book2.get(0).getTitle().equals("Frankenstein")) {
               // if it equals Frankenstein then the searchbyTitleWord is working
@@ -95,15 +97,34 @@ public class BackendDeveloperTest {
         Book book = new Book("Frankenstein", "Mary Shelley", "54321");
 
         book_backend.addBook(book);
-        List<IBook> book2 = book_backend.searchByTitleWord(""); // the word is Frank
+        List<IBook> book2 = book_backend.searchByTitleWord(""); // the word is nothing
 
-        if (book2.get(0).getTitle().equals("")) {
+        if (book2.get(0) != null) {
               // it should return all the books
             return true;
         }
 
         System.out.println("The searchByTitleWord with no word did not work");
         return false;
+    }
+
+    public static boolean test7()
+    {
+        Book book = new Book("Frankenstein", "Mary Shelley", "54321");
+
+        book_backend.addBook(book);
+        book_backend.setAuthorFilter("Mary Shelley");
+        List<IBook> book2 = book_backend.searchByTitleWord("");// there is now an author filter
+
+        if(book2.get(0).getAuthors().equals("Mary Shelley"))
+        {
+            // author filter checker
+            return true;
+        }
+        System.out.println("test7");
+        return false;
+
+
     }
 
 
@@ -128,6 +149,10 @@ public class BackendDeveloperTest {
         return  test5(); // called in main.
     }
     public static boolean runTest6() {
-        return  test5(); // called in main.
+        return  test6(); // called in main.
     }
+    public static boolean runTest7() {
+        return  test7(); // called in main.
+    }
+
 }
