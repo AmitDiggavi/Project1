@@ -65,17 +65,44 @@ public class BookMapperBackend implements IBookMapperBackend {
      */
     public List<IBook> searchByTitleWord(String word) {
         List<IBook> list_of_books = new ArrayList<>();
+
         for(IBook book : hashmap)
         {
-            if(book.getTitle().equals(word))
+            if(getAuthorFilter().equals(""))
             {
-                list_of_books.add(book);
-                return list_of_books;
+                if(word.equals("")) {
+                    list_of_books.add(book);
+                } else
+                {
+                    if (book.getTitle().equals(word)) {
+                        list_of_books.add(book);
+                        return list_of_books;
+                    }
+                }
+
+            }  else
+            {
+                if(word.equals("")) {
+                    if (book.getAuthors().equals(getAuthorFilter())) {
+                        list_of_books.add(book);
+                    }
+                } else
+                {
+                    if(book.getTitle().equals(word) && book.getAuthors().equals(getAuthorFilter()))
+                    {
+                        list_of_books.add(book);
+                        return list_of_books;
+                    }
+                }
+
+
             }
+
         }
 
-        return null;
+        return word.equals("") ? list_of_books : null;
     }
+
 
         /**
          * Return the book uniquely identified by the ISBN, or null if ISBN is not
