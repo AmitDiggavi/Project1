@@ -99,9 +99,7 @@ public class BookMapperBackend implements IBookMapperBackend {
 
         }
 
-        return word.equals("") 
-            ? list_of_books 
-            : (list_of_books.size() == 0 ? null : list_of_books);
+        return list_of_books;
     }
 
 
