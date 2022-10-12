@@ -1,12 +1,70 @@
-Script started on 2022-10-06 04:18:37+00:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="93" LINES="51"]
-[?2004h]0;suryanarne@instance-2: ~/Project1_DW_blue[01;32msuryanarne@instance-2[00m:[01;34m~/Project1_DW_blue[00m$ gt[Kit add log\[K
-[?2004l[?2004h]0;suryanarne@instance-2: ~/Project1_DW_blue[01;32msuryanarne@instance-2[00m:[01;34m~/Project1_DW_blue[00m$ git commit
-[?2004lOn branch DataWrangler
-Your branch is ahead of 'origin/DataWrangler' by 1 commit.
+Script started on Wed Oct  5 18:40:24 2022
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro.local/Users/matthewmoy/cs400/Project1_DW_blue[0m[27m[24m[Jmatthewmoy@MacBook-Pro Project1_DW_blue % [K[?2004h[7mgit status[27m
+[K[A[42C[27mg[27mi[27mt[27m [27ms[27mt[27ma[27mt[27mu[27ms[1B[K[?2004l
+On branch FrontendDeveloper
+Your branch is ahead of 'origin/FrontendDeveloper' by 1 commit.
   (use "git push" to publish your local commits)
 
-nothing to commit, working tree clean
-[?2004h]0;suryanarne@instance-2: ~/Project1_DW_blue[01;32msuryanarne@instance-2[00m:[01;34m~/Project1_DW_blue[00m$ git push[K[K[K[K[K[K[K[K[?2004l
-exit
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	[31m.idea/[m
+	[31mBookMapperFrontend.class[m
+	[31mFrontendDeveloperTest.class[m
+	[31mIBook.class[m
+	[31mIBookMapperBackend.class[m
+	[31mIBookMapperFrontend.class[m
+	[31mIISBNValidator.class[m
+	[31mTextUITester.class[m
+	[31mlog[m
+	[31mout/[m
 
-Script done on 2022-10-06 04:27:06+00:00 [COMMAND_EXIT_CODE="1"]
+nothing added to commit but untracked files present (use "git add" to track)
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro.local/Users/matthewmoy/cs400/Project1_DW_blue[0m[27m[24m[Jmatthewmoy@MacBook-Pro Project1_DW_blue % [K[?2004h[7mgit log -1[27m
+[K[A[42C[27mg[27mi[27mt[27m [27ml[27mo[27mg[27m [27m-[27m1[1B[K[?2004l
+[?1h=[33mcommit 07f99297ecaa2eeaaabfe64c7da33d979d6a8e89[m[33m ([m[1;36mHEAD -> [m[1;32mFrontendDeveloper[m[33m)[m[m
+Author: Matthew Moy <matthewmoy@MacBook-Pro.local>[m
+Date:   Wed Oct 5 18:39:23 2022 -0500[m
+[m
+    Implemented BookMapperFrontend and FrontendDeveloperTest[m
+[K[?1l>[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro.local/Users/matthewmoy/cs400/Project1_DW_blue[0m[27m[24m[Jmatthewmoy@MacBook-Pro Project1_DW_blue % [K[?2004h[7mmake clean[27m
+[K[A[42C[27mm[27ma[27mk[27me[27m [27mc[27ml[27me[27ma[27mn[1B[K[?2004l
+make: *** No rule to make target `clean'.  Stop.
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro.local/Users/matthewmoy/cs400/Project1_DW_blue[0m[27m[24m[Jmatthewmoy@MacBook-Pro Project1_DW_blue % [K[?2004h[7mls[27m[27ml[27ms[?2004l
+BookMapper.java			IISBNValidator.class
+BookMapperFrontend.class	IISBNValidator.java
+BookMapperFrontend.java		IterableMapADT.java
+FrontendDeveloperTest.class	Makefile
+FrontendDeveloperTest.java	MapADT.java
+IBook.class			Project1_DW_blue.iml
+IBook.java			TextUITester.class
+IBookLoader.java		TextUITester.java
+IBookMapperBackend.class	books.csv
+IBookMapperBackend.java		log
+IBookMapperFrontend.class	out
+IBookMapperFrontend.java
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro.local/Users/matthewmoy/cs400/Project1_DW_blue[0m[27m[24m[Jmatthewmoy@MacBook-Pro Project1_DW_blue % [K[?2004h[7mmake runTests[27m
+[K[A[42C[27mm[27ma[27mk[27me[27m [27mr[27mu[27mn[27mT[27me[27ms[27mt[27ms[1B[K[?2004l
+javac BookMapperFrontend.java FrontendDeveloperTest.java
+java FrontendDeveloperTest
+Welcome to the Book Mapper Application!
+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+x
+
+You are in the Main Menu:
+          1) Lookup ISBN
+          2) Search by Title Word
+          3) Set Author Name Filter
+          4) Exit Application
+
+Goodbye!
+
+Test 1: true
+make: *** [runTests] Error 1
+[1m[7m%[27m[1m[0m                                                                                ]7;file://MacBook-Pro.local/Users/matthewmoy/cs400/Project1_DW_blue[0m[27m[24m[Jmatthewmoy@MacBook-Pro Project1_DW_blue % [K[?2004h[7mexit[27m
+[K[A[42C[27me[27mx[27mi[27mt[1B[K[?2004l
+
+Saving session...
+...copying shared history...
+...saving history...truncating history files...
+...completed.
+
+Script done on Wed Oct  5 18:41:50 2022

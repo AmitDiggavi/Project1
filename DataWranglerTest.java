@@ -32,6 +32,7 @@ public class DataWranglerTest {
                 return false;
         }
 
+
         // checks if all the books are printed
         public static boolean test2() {
 
@@ -242,4 +243,4 @@ public class DataWranglerTest {
 
                 return false;
         }
-
+}
