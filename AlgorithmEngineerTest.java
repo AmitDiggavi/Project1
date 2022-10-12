@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -10,6 +11,8 @@ public class AlgorithmEngineerTest {
         System.out.println("AlgorithmEngineer Individual Test 5: " + (test5() ? "passed" : "failed"));
         System.out.println("AlgorithmEngineer Integration Test 1: " + (test6() ? "passed" : "failed"));
         System.out.println("AlgorithmEngineer Integration Test 2: " + (test7() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 1: " + (test8() ? "passed" : "failed"));
+        System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 2: " + (test9() ? "passed" : "failed"));
     }
 
     /**
@@ -164,6 +167,38 @@ public class AlgorithmEngineerTest {
 
             if (!backend.getByISBN("978-0-306-40615-7").equals(book1)) return false;
         } catch (Exception ignored) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // method tests if ibook can retrieve isbn even when null
+    public static boolean test8() {
+        try {
+            IBook book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0-306-40615-7");
+            if (!book.getISBN13().equals("978-0-306-40615-7")) return false;
+
+            book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", null);
+            if (book.getISBN13() != null) return false;
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // method tests if ibook can retrieve title & author even when null
+    public static boolean test9() {
+        try {
+            IBook book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0-306-40615-7");
+            if (!book.getTitle().equals("The Hitchhiker's Guide to the Galaxy")) return false;
+            if (!book.getAuthors().equals("Douglas Adams")) return false;
+
+            book = new Book(null, null, "978-0-306-40615-7");
+            if (book.getTitle() != null) return false;
+            if (book.getAuthors() != null) return false;
+        } catch (Exception e) {
             return false;
         }
 
