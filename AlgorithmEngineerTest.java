@@ -173,11 +173,14 @@ public class AlgorithmEngineerTest {
         return true;
     }
 
-    // method tests if ibook can retrieve isbn
+    // method tests if ibook can retrieve isbn even when null
     public static boolean test8() {
         try {
             IBook book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0-306-40615-7");
             if (!book.getISBN13().equals("978-0-306-40615-7")) return false;
+
+            book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", null);
+            if (book.getISBN13() != null) return false;
         } catch (Exception e) {
             return false;
         }
@@ -185,12 +188,16 @@ public class AlgorithmEngineerTest {
         return true;
     }
 
-    // method tests if ibook can retrieve title & author
+    // method tests if ibook can retrieve title & author even when null
     public static boolean test9() {
         try {
             IBook book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0-306-40615-7");
             if (!book.getTitle().equals("The Hitchhiker's Guide to the Galaxy")) return false;
             if (!book.getAuthors().equals("Douglas Adams")) return false;
+
+            book = new Book(null, null, "978-0-306-40615-7");
+            if (book.getTitle() != null) return false;
+            if (book.getAuthors() != null) return false;
         } catch (Exception e) {
             return false;
         }
