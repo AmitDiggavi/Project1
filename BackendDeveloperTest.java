@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class BackendDeveloperTest {
 
@@ -13,11 +14,8 @@ public class BackendDeveloperTest {
         System.out.println("BackendDeveloper Individual Test 5: " + (test5() ? "passed" : "failed"));
         System.out.println("BackendDeveloper Integration  Test 6: " + (test6() ? "passed" : "failed"));
         System.out.println("BackendDeveloper Integration  Test 7: " + (test7() ? "passed" : "failed"));
-        System.out.println("FrontendDeveloper Partner (BackendDeveloper) Test 1: " +
-            (partnerTest1() ? "passed" : "failed"));
-        System.out.println("FrontendDeveloper Partner (BackendDeveloper) Test 2: " +
-            (partnerTest2() ? "passed" : "failed"));
-
+        System.out.println("BackendDeveloper Partner (FrontendDeveloper) Test 1: " + (test8() ? "passed" : "failed"));
+        System.out.println("BackendDeveloper Partner (FrontendDeveloper) Test 2: " + (test9() ? "passed" : "failed"));
 
     }
 
@@ -133,51 +131,43 @@ public class BackendDeveloperTest {
     }
 
     /**
-     * Tests that getNumberOfBooks works
+     * tests if the method returns all the books if the search by title and the author filter are just "enter""
      * @return true if successful, false otherwise
      */
-    public static boolean partnerTest1()
-    {
-        BookMapperBackend book_backend2 = new BookMapperBackend();
-        Book book = new Book("Frankenstein", "Mary Shelley", "54321");
-
-        book_backend2.addBook(book);
-
-        if(book_backend2.getNumberOfBooks() == 1)
-        {
-            return true;
-        }
-        System.out.println("Number of books was incorrect");
-        return false;
-
-
+    public static boolean test8() {
+        TextUITester tester = new TextUITester("2\n\n3\n\n4\n");
+        Scanner scn = new Scanner(System.in);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
+        Book hitchhiker = new Book("Hitchhiker", "Douglas Adams", "1231231231235");
+        Book harry_potter = new Book("Harry Potter", "JK Rowling", "1234567890123");
+        Book frankenstein = new Book("Frankenstein", "Mary Shelley", "3210987654321");
+        backend.addBook(hitchhiker);
+        backend.addBook(frankenstein);
+        backend.addBook(harry_potter);
+        testFrontend.runCommandLoop();
+        String output = tester.checkOutput();
+        return output.contains("Hitchhiker") && output.contains("Frankenstein") && output.contains("Harry Potter");
     }
 
     /**
-     * Tests when no author filter is set and no title word is searched for that all books are in
-     * the list
-     * @return true if successful, false otherwise
+     * Tests the return if the ISBN does not match the ISBN of the book.
+     * @return true if the correct book corresponding to the ISBN is printed, false otherwise
      */
-    public static boolean partnerTest2()
-    {
-        BookMapperBackend book_backend2 = new BookMapperBackend();
-        Book book = new Book("Frankenstein", "Mary Shelley", "54321");
-        Book book2 = new Book("Steam", "James Joyce", "12345");
-
-        book_backend2.addBook(book);
-        book_backend2.addBook(book2);
-        book_backend2.setAuthorFilter("");
-        List<IBook> books = book_backend2.searchByTitleWord("");
-
-        if(books.size() == 2)
-        {
-            return true;
-        }
-        System.out.println("Did not print all books");
-        return false;
-
-
+    public static boolean test9() {
+        TextUITester tester = new TextUITester("1\n9781812297047\n4\n");
+        Scanner scn = new Scanner(System.in);
+        IBookMapperBackend backend = new BookMapperBackend();
+        IISBNValidator validator = new ISBNValidator();
+        BookMapperFrontend testFrontend = new BookMapperFrontend(scn, backend, validator);
+        Book hitchhiker = new Book("Hitchhiker", "Douglas Adams", "9781812297048");
+        backend.addBook(hitchhiker);
+        testFrontend.runCommandLoop();
+        String output = tester.checkOutput();
+        return output.contains("Invalid ISBN");
     }
+
 
 
 

@@ -10,8 +10,8 @@ public class DataWranglerTest {
                 System.out.println("DataWrangler Individual Test 5: " + (test5() ? "passed" : "failed"));
                 System.out.println("DataWrangler Integration Test 1: " + (test6() ? "passed" : "failed"));
                 System.out.println("DataWrangler Integration Test 2: " + (test7() ? "passed" : "failed"));
-                System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 1: " + (test8() ? "passed" : "failed"));
-                System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 2: " + (test9() ? "passed" : "failed"));
+                System.out.println("DataWrangler (AlgorithmEngineer) Test 1: " + (test8() ? "passed" : "failed"));
+                System.out.println("DataWrangler (AlgorithmEngineer) Test 2: " + (test9() ? "passed" : "failed"));
         }
 
         // this method is to check if the path is null
@@ -189,42 +189,56 @@ public class DataWranglerTest {
                 return false;
         }
 
-        // method tests if backend has correct number of books after book load
-        public static boolean test8() {
-                BookLoader obj = new BookLoader();
-                BookMapperBackend bmb = new BookMapperBackend();
+        //validator checks for empty string
+        public static boolean test8()
+        {
+                ISBNValidator val = new ISBNValidator();
 
-                try {
-                        int numBooks = 0;
-                        for (IBook b : obj.loadBooks("books.csv")) {
-                                bmb.addBook(b);
-                                numBooks++;
-                        }
-
-                        return bmb.getNumberOfBooks() == numBooks;
-                } catch (FileNotFoundException e) {
-                        return false;
-                }
-        }
-
-        // method tests if backend can search by title after book load
-        public static boolean test9() {
-                String title = "The Hitchhiker's Guide to the Galaxy (Hitchhiker's Guide to the Galaxy  #1)";
-                BookLoader obj = new BookLoader();
-                BookMapperBackend bmb = new BookMapperBackend();
-
-                try {
-                        for (IBook b : obj.loadBooks("books.csv")) {
-                                bmb.addBook(b);
-                        }
-
-                        if (bmb.searchByTitleWord(title).size() != 0) {
-                                return true;
-                        }
-                } catch (FileNotFoundException e) {
-                        return false;
+                if(!val.validate(""))
+                {
+                        return true;
                 }
 
                 return false;
         }
+
+        //checks resize after books load
+        public static boolean test9()
+        {
+
+                try
+                {
+                        List<IBook> books = new BookLoader().loadBooks("books.csv");
+
+                        IterableMap<String, IBook> map = new IterableMap<>();
+
+                        int bookcount = 0;
+
+
+                        for(IBook b : books)
+                        {
+                                map.put(b.getISBN13(), b);
+
+                                bookcount++;
+                        }
+
+                        if(bookcount == map.size())
+                        {
+                                return true;
+
+                        }
+
+
+                }
+
+                catch(Exception e)
+                {
+                        return false;
+                }
+
+                return false;
+
+
+        }
+
 }
