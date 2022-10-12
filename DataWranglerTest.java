@@ -10,8 +10,8 @@ public class DataWranglerTest {
                 System.out.println("DataWrangler Individual Test 5: " + (test5() ? "passed" : "failed"));
                 System.out.println("DataWrangler Integration Test 1: " + (test6() ? "passed" : "failed"));
                 System.out.println("DataWrangler Integration Test 2: " + (test7() ? "passed" : "failed"));
-                System.out.println("DataWrangler Partner (AlgorithmEngineer) Test 1: " + (test8() ? "passed" : "failed"));
-                System.out.println("DataWrangler Partner (AlgorithmEngineer) Test 2: " + (test9() ? "passed" : "failed"));
+                System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 1: " + (test8() ? "passed" : "failed"));
+                System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 2: " + (test9() ? "passed" : "failed"));
         }
 
         // this method is to check if the path is null
