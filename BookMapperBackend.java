@@ -76,7 +76,6 @@ public class BookMapperBackend implements IBookMapperBackend {
                 {
                     if (book.getTitle().toLowerCase().contains(word.toLowerCase())) {
                         list_of_books.add(book);
-                        return list_of_books;
                     }
                 }
 
@@ -92,7 +91,6 @@ public class BookMapperBackend implements IBookMapperBackend {
                         && book.getAuthors().contains(getAuthorFilter()))
                     {
                         list_of_books.add(book);
-                        return list_of_books;
                     }
                 }
 
@@ -101,7 +99,9 @@ public class BookMapperBackend implements IBookMapperBackend {
 
         }
 
-        return word.equals("") ? list_of_books : null;
+        return word.equals("") 
+            ? list_of_books 
+            : (list_of_books.size() == 0 ? null : list_of_books);
     }
 
 
