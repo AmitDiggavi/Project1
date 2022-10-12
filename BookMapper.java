@@ -8,11 +8,11 @@ import java.util.Scanner;
 public class BookMapper {
 
     public static void main(String[] args) throws FileNotFoundException {
-	IBookLoader bookLoader = null; // new BookLoader();
+	IBookLoader bookLoader = new BookLoader(); // new BookLoader();
         // load the books from the data file
-        List<IBook> bookList = null; // bookLoader.loadBooks("books.csv");
+        List<IBook> bookList = bookLoader.loadBooks("books.csv"); // bookLoader.loadBooks("books.csv");
         // instantiate the backend
-        IBookMapperBackend backend = null; // new BookMapperBackend();
+        IBookMapperBackend backend = new BookMapperBackend(); // new BookMapperBackend();
         // add all the books to the backend
         // for (IBook book : bookList) backend.addBook(book);
         // instantiate the isbn validator
