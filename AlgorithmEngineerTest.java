@@ -173,42 +173,28 @@ public class AlgorithmEngineerTest {
         return true;
     }
 
-    // method tests if backend has correct number of books after book load
+    // method tests if ibook can retrieve isbn
     public static boolean test8() {
-        BookLoader obj = new BookLoader();
-        BookMapperBackend bmb = new BookMapperBackend();
-
         try {
-            int numBooks = 0;
-            for (IBook b : obj.loadBooks("books.csv")) {
-                bmb.addBook(b);
-                numBooks++;
-            }
-
-            return bmb.getNumberOfBooks() == numBooks;
-        } catch (FileNotFoundException e) {
+            IBook book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0-306-40615-7");
+            if (!book.getISBN13().equals("978-0-306-40615-7")) return false;
+        } catch (Exception e) {
             return false;
         }
+
+        return true;
     }
 
-    // method tests if backend can search by title after book load
+    // method tests if ibook can retrieve title & author
     public static boolean test9() {
-        String title = "The Hitchhiker's Guide to the Galaxy (Hitchhiker's Guide to the Galaxy  #1)";
-        BookLoader obj = new BookLoader();
-        BookMapperBackend bmb = new BookMapperBackend();
-
         try {
-            for (IBook b : obj.loadBooks("books.csv")) {
-                bmb.addBook(b);
-            }
-
-            if (bmb.searchByTitleWord(title).size() != 0) {
-                return true;
-            }
-        } catch (FileNotFoundException e) {
+            IBook book = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0-306-40615-7");
+            if (!book.getTitle().equals("The Hitchhiker's Guide to the Galaxy")) return false;
+            if (!book.getAuthors().equals("Douglas Adams")) return false;
+        } catch (Exception e) {
             return false;
         }
 
-        return false;
+        return true;
     }
 }
