@@ -13,6 +13,11 @@ public class BackendDeveloperTest {
         System.out.println("BackendDeveloper Individual Test 5: " + (test5() ? "passed" : "failed"));
         System.out.println("BackendDeveloper Integration  Test 6: " + (test6() ? "passed" : "failed"));
         System.out.println("BackendDeveloper Integration  Test 7: " + (test7() ? "passed" : "failed"));
+        System.out.println("FrontendDeveloper Partner (BackendDeveloper) Test 1: " +
+            (partnerTest1() ? "passed" : "failed"));
+        System.out.println("FrontendDeveloper Partner (BackendDeveloper) Test 2: " +
+            (partnerTest2() ? "passed" : "failed"));
+
 
     }
 
@@ -122,6 +127,53 @@ public class BackendDeveloperTest {
             return true;
         }
         System.out.println("test7");
+        return false;
+
+
+    }
+
+    /**
+     * Tests that getNumberOfBooks works
+     * @return true if successful, false otherwise
+     */
+    public static boolean partnerTest1()
+    {
+        BookMapperBackend book_backend2 = new BookMapperBackend();
+        Book book = new Book("Frankenstein", "Mary Shelley", "54321");
+
+        book_backend2.addBook(book);
+
+        if(book_backend2.getNumberOfBooks() == 1)
+        {
+            return true;
+        }
+        System.out.println("Number of books was incorrect");
+        return false;
+
+
+    }
+
+    /**
+     * Tests when no author filter is set and no title word is searched for that all books are in
+     * the list
+     * @return true if successful, false otherwise
+     */
+    public static boolean partnerTest2()
+    {
+        BookMapperBackend book_backend2 = new BookMapperBackend();
+        Book book = new Book("Frankenstein", "Mary Shelley", "54321");
+        Book book2 = new Book("Steam", "James Joyce", "12345");
+
+        book_backend2.addBook(book);
+        book_backend2.addBook(book2);
+        book_backend2.setAuthorFilter("");
+        List<IBook> books = book_backend2.searchByTitleWord("");
+
+        if(books.size() == 2)
+        {
+            return true;
+        }
+        System.out.println("Did not print all books");
         return false;
 
 
