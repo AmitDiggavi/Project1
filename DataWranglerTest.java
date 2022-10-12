@@ -204,7 +204,12 @@ public class DataWranglerTest {
                 return false;
         }
 
-        //validator checks for empty string
+      
+       
+	/*
+         * Partner Test1
+         *  method checks validator with some edge cases
+         */ 
         public static boolean test8()
         {
                 ISBNValidator val = new ISBNValidator();
@@ -217,44 +222,27 @@ public class DataWranglerTest {
                 return false;
         }
 
-
-        //checks resize after books load
+	 
+	
+	/*
+         * Partner Test 2
+         *  method checks if the hashmap is empty or not
+         */
         public static boolean test9()
         {
+            IterableMap<Integer, Integer> map = new IterableMap();
 
-                try
-                {
-                        List<IBook> books = new BookLoader().loadBooks("books.csv");
+	    map.put(3,384);
+	    map.put(42647,24);
+	    map.put(273,384);
+	    map.put(38,482);
+	    
+           if(map.size() != 0)
+           {
+        	   return true;
+           }
+            return false;
 
-                        IterableMap<String, IBook> map = new IterableMap<>();
-
-                        int bookcount = 0;
-
-
-                        for(IBook b : books)
-                        {
-                                map.put(b.getISBN13(), b);
-
-                                bookcount++;
-                        }
-
-                        if(bookcount == map.size())
-                        {
-                                return true;
-
-                        }
-
-
-                }
-
-                catch(Exception e)
-                {
-                        return false;
-                }
-
-                return false;
-
-
-        }
+         }
 
 }
