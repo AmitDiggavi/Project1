@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class AlgorithmEngineerTest {
@@ -9,10 +10,12 @@ public class AlgorithmEngineerTest {
         System.out.println("AlgorithmEngineer Individual Test 5: " + (test5() ? "passed" : "failed"));
         System.out.println("AlgorithmEngineer Integration Test 1: " + (test6() ? "passed" : "failed"));
         System.out.println("AlgorithmEngineer Integration Test 2: " + (test7() ? "passed" : "failed"));
+        System.out.println("DataWrangler (AlgorithmEngineer) Test 1: " + (test8() ? "passed" : "failed"));
+        System.out.println("DataWrangler (AlgorithmEngineer) Test 2: " + (test9() ? "passed" : "failed"));
     }
 
     /**
-     * tests basic map functionality
+     * tests basic map functionality & remove with existent and non-existent keys
      */
     public static boolean test1() {
         try {
@@ -34,6 +37,13 @@ public class AlgorithmEngineerTest {
             if (!map.remove("a").equals("b")) return false;
             if (map.remove("f") != null) return false;
             if (map.containsKey("a")) return false;
+
+            // duplicate key
+            map.put("alex", "goat");
+            if (map.put("alex", "not the goat")) return false;
+
+            map.get("non-existent");
+            return false;
         } catch (NoSuchElementException e) {
             if (!e.getMessage().equals("Map does not contain key"))
                 return false;
@@ -61,14 +71,26 @@ public class AlgorithmEngineerTest {
     }
 
     /**
-     * tests containsKey
+     * tests utility methods - size, clear, and containsKey
      */
     public static boolean test3() {
         try {
             IterableMap<String, String> map = new IterableMap<>();
-            map.put("a", "b");
 
+            // size 0
+            if (map.size() != 0) return false;
+            
+            // size 2
+            map.put("a", "b");
+            map.put("c", "d");
+            if (map.size() != 2) return false;
+            
             if (!map.containsKey("a")) return false;
+            
+            // cleared
+            map.clear();
+            if (map.size() != 0) return false;
+
         } catch (Exception ignored) {
             return false;
         }
@@ -116,23 +138,14 @@ public class AlgorithmEngineerTest {
     }
 
     /**
-     * tests utility methods - size, clear
+     * tests ISBN validator after book load
      */
     public static boolean test6() {
         try {
-            IterableMap<String, String> map = new IterableMap<>();
-            // size 0
-            if (map.size() != 0) return false;
-
-            // size 2
-            map.put("a", "b");
-            map.put("c", "d");
-            if (map.size() != 2) return false;
-
-            // cleared
-            map.clear();
-            if (map.size() != 0) return false;
-
+            ISBNValidator iv = new ISBNValidator();
+            BookLoader bl = new BookLoader();
+            List<IBook> books = bl.loadBooks("books.csv");
+            if (!iv.validate(books.get(0).getISBN13())) return false;
         } catch (Exception ignored) {
             return false;
         }
@@ -141,25 +154,73 @@ public class AlgorithmEngineerTest {
     }
 
     /**
-     * tests remove with existent and non-existent keys
+     * tests backend addBook method (uses IterableMap)
      */
     public static boolean test7() {
         try {
-            IterableMap<String, String> map = new IterableMap<>();
+            BookMapperBackend backend = new BookMapperBackend();
 
-            // duplicate key
-            map.put("alex", "goat");
-            if (map.put("alex", "not the goat")) return false;
+            IBook book1 = new Book("The Hitchhiker's Guide to the Galaxy", "Douglas Adams", "978-0-306-40615-7");
 
-            map.get("non-existent");
-            return false;
-        } catch (NoSuchElementException e) {
-            if (!e.getMessage().equals("Map does not contain key"))
-                return false;
+            backend.addBook(book1);
+
+            if (!backend.getByISBN("978-0-306-40615-7").equals(book1)) return false;
         } catch (Exception ignored) {
             return false;
         }
 
         return true;
+    }
+    
+    //validator checks for empty string
+    public static boolean test8()
+    {
+      ISBNValidator val = new ISBNValidator();
+      
+      if(!val.validate(""))
+      {
+    	  return true;
+      }
+      
+      return false;
+    }
+    
+    //checks resize after books load
+    public static boolean test9()
+    {
+    	
+    	try
+    	{
+    		List<IBook> books = new BookLoader().loadBooks("books.csv");
+    		
+    		IterableMap<String, IBook> map = new IterableMap<>();
+    		
+    		int bookcount = 0;
+    		
+    		
+    		for(IBook b : books)
+    		{
+    			map.put(b.getISBN13(), b);
+    			
+    			bookcount++;
+    		}
+    		
+    		if(bookcount == map.size())
+    		{
+    			return true;
+    		
+    		}
+    		
+ 
+    	}
+    	
+    	catch(Exception e)
+		{
+			return false;
+		}
+    	
+    	return false;
+    	
+    	
     }
 }
