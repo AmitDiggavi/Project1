@@ -163,7 +163,7 @@ public class DataWranglerTest {
                         }
 
                         for (IBook b : bmb.searchByTitleWord("")) {
-                                if (!b.getAuthors().equals(author)) {
+                                if (!b.getAuthors().contains(author)) {
                                         return false;
                                 }
                         }
