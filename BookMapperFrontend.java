@@ -51,7 +51,7 @@ public class BookMapperFrontend implements IBookMapperFrontend {
      * This method reads an isbn from System.in, displays results
      */
     public void isbnLookup() {
-        System.out.println("You are in the Set Author Filter Menu:");
+        System.out.println("You are in the Lookup ISBN Menu:");
         System.out.println("          Enter ISBN to look up: ");
         scn.nextLine();
         String currentISBN = scn.nextLine().trim();
