@@ -145,7 +145,7 @@ public class DataWranglerTest {
          * methods checks if author filter is set by searchByTitleWord
          */
         public static boolean test6() {
-                String author = "Douglas Adams";
+                String author = "Rowling";
 
                 BookLoader obj = new BookLoader();
 
