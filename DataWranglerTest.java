@@ -9,11 +9,10 @@ public class DataWranglerTest {
                 System.out.println("DataWrangler Individual Test 4: " + (test4() ? "passed" : "failed"));
                 System.out.println("DataWrangler Individual Test 5: " + (test5() ? "passed" : "failed"));
                 System.out.println("DataWrangler Integration Test 1: " + (test6() ? "passed" : "failed"));
-                System.out.println("DataWrangler Integration Test 2: " + (test7() ? "passed" : "failed"));
-                System.out.println("DataWrangler (AlgorithmEngineer) Test 1: " + (test8() ? "passed" : "failed"));
-                System.out.println("DataWrangler (AlgorithmEngineer) Test 2: " + (test9() ? "passed" : "failed"));
+                  System.out.println("DataWrangler Integration Test 2: " + (test7() ? "passed" : "failed"));
+                System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 1: " + (test8() ? "passed" : "failed"));
+                System.out.println("AlgorithmEngineer Partner (DataWrangler) Test 2: " + (test9() ? "passed" : "failed"));
         }
-
         // this method is to check if the path is null
         public static boolean test1() {
 
@@ -32,19 +31,27 @@ public class DataWranglerTest {
                 return false;
         }
 
-        // prints all the books present in the csv file
+
+        // checks if all the books are printed
         public static boolean test2() {
 
                 BookLoader obj = new BookLoader();
 
                 List<IBook> books;
+                
+                int bookCount = 0;
 
                 try {
                         books = obj.loadBooks("books.csv");
                         for (IBook b : books) {
 
-                                return true;
+                               bookCount++;
 
+                        }
+                        
+                        if(books.size() == bookCount)
+                        {
+                        	return true;
                         }
 
                 }
@@ -53,10 +60,10 @@ public class DataWranglerTest {
                         return false;
                 }
 
-                return true;
+                return false;
         }
 
-        // this method returns the count of books present in the csv file
+        //method is used to check if there any books present in the file
         public static boolean test3() {
                 BookLoader obj = new BookLoader();
 
@@ -67,7 +74,8 @@ public class DataWranglerTest {
 
                         int bookCount = books.size();
 
-                        if (bookCount != 0) {
+                        if (bookCount != 0) 
+                        {
                                 return true;
                         }
                 }
@@ -79,7 +87,7 @@ public class DataWranglerTest {
                 return true;
         }
 
-        // method returns details of a book through isbn
+        // method checks if given isbn is valid
         public static boolean test4() {
                 String isbn = "9780976540601";
 
@@ -105,7 +113,7 @@ public class DataWranglerTest {
                 return false;
         }
 
-        // method returns details of a book through authors
+        // method checks author filter
         public static boolean test5() {
                 String author = "Rowling";
 
@@ -117,7 +125,8 @@ public class DataWranglerTest {
                         books = obj.loadBooks("books.csv");
 
                         for (IBook b : books) {
-                                if (b.getAuthors().contains(author)) {
+                                if (b.getAuthors().contains(author)) 
+                                {
                                         return true;
                                 }
 
@@ -131,7 +140,10 @@ public class DataWranglerTest {
                 return false;
         }
 
-        // method sets a author filter
+        /*
+         * Integration Test 1
+         * methods checks if author filter is set by searchByTitleWord
+         */
         public static boolean test6() {
                 String author = "Douglas Adams";
 
@@ -164,7 +176,10 @@ public class DataWranglerTest {
                 return true;
         }
 
-        // method validates entered for isbn
+        /*
+         * Integration Test 2
+         * method checks if validator validates an isbn
+         */
         public static boolean test7() {
                 BookLoader obj = new BookLoader();
 
@@ -189,7 +204,12 @@ public class DataWranglerTest {
                 return false;
         }
 
-        //validator checks for empty string
+      
+       
+	/*
+         * Partner Test1
+         *  method checks validator with some edge cases
+         */ 
         public static boolean test8()
         {
                 ISBNValidator val = new ISBNValidator();
@@ -202,43 +222,27 @@ public class DataWranglerTest {
                 return false;
         }
 
-        //checks resize after books load
+	 
+	
+	/*
+         * Partner Test 2
+         *  method checks if the hashmap is empty or not
+         */
         public static boolean test9()
         {
+            IterableMap<Integer, Integer> map = new IterableMap();
 
-                try
-                {
-                        List<IBook> books = new BookLoader().loadBooks("books.csv");
+	    map.put(3,384);
+	    map.put(42647,24);
+	    map.put(273,384);
+	    map.put(38,482);
+	    
+           if(map.size() != 0)
+           {
+        	   return true;
+           }
+            return false;
 
-                        IterableMap<String, IBook> map = new IterableMap<>();
-
-                        int bookcount = 0;
-
-
-                        for(IBook b : books)
-                        {
-                                map.put(b.getISBN13(), b);
-
-                                bookcount++;
-                        }
-
-                        if(bookcount == map.size())
-                        {
-                                return true;
-
-                        }
-
-
-                }
-
-                catch(Exception e)
-                {
-                        return false;
-                }
-
-                return false;
-
-
-        }
+         }
 
 }
