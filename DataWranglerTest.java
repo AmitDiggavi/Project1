@@ -230,7 +230,7 @@ public class DataWranglerTest {
          */
         public static boolean test9()
         {
-            IterableMap<Integer, Integer> map = new IterableMap();
+            IterableMap<Integer, Integer> map = new IterableMap<>();
 
 	    map.put(3,384);
 	    map.put(42647,24);
