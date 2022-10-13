@@ -1,32 +1,20 @@
-run: BookMapper.class Book.class BookLoader.class BookMapperBackend.class BookMapperFrontend.java ISBNValidator.java IterableMap.java
+run: compileAll
 	@java BookMapper
+	@$(MAKE) clean # silently clean up after run
 
 runTests: runDataWranglerTests runAlgorithmEngineerTests runFrontendDeveloperTests runBackendDeveloperTests
-	@$(MAKE) clean
+	@$(MAKE) clean # silently clean up after tests
 
-runDataWranglerTests: Book.class BookLoader.class DataWranglerTest.class
+compileAll: BookMapper.java Book.java BookLoader.java BookMapperBackend.java BookMapperFrontend.java ISBNValidator.java IterableMap.java
+	@javac BookMapper.java Book.java BookLoader.java BookMapperBackend.java BookMapperFrontend.java ISBNValidator.java IterableMap.java
+
+runDataWranglerTests: Book.java BookLoader.java DataWranglerTest.java
+	@javac BookLoader.java Book.java DataWranglerTest.java
 	@java DataWranglerTest
 
-BookMapper.class: BookMapper.java
-	@javac BookMapper.java
-
-
-Book.class: Book.java
-	@javac Book.java
-
-BookLoader.class: BookLoader.java
-	@javac BookLoader.java
-
-DataWranglerTest.class: DataWranglerTest.java
-	@javac DataWranglerTest.java
-
-
-runBackendDeveloperTests: BackendDeveloperTest.class
+runBackendDeveloperTests: BackendDeveloperTest.java BookMapperBackend.java
+	@javac BackendDeveloperTest.java BookMapperBackend.java
 	@java BackendDeveloperTest
-BackendDeveloperTest.class:	BackendDeveloperTest.java BookMapperBackend.class
-	@javac BackendDeveloperTest.java
-BookMapperBackend.class: BookMapperBackend.java
-	@javac BookMapperBackend.java
 
 runAlgorithmEngineerTests: AlgorithmEngineerTest.java ISBNValidator.java IterableMap.java
 	@javac AlgorithmEngineerTest.java ISBNValidator.java IterableMap.java
@@ -37,4 +25,4 @@ runFrontendDeveloperTests: BookMapperFrontend.java FrontendDeveloperTest.java
 	@java FrontendDeveloperTest
 
 clean:
-	rm *.class
+	@rm *.class
